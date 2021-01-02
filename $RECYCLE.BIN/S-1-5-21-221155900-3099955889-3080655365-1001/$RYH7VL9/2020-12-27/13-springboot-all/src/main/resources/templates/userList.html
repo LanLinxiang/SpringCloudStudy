@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <span th:if="${session.userSession!=null}">
+        您好，<span th:text="${session.userSession.realName}"></span>
+    </span>
+    <h1>用户列表</h1>
+    <a th:href="@{|/private/toAdd|}">添加数据</a>
+    <table>
+        <tr>
+            <td>序号</td>
+            <td>账号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>生日</td>
+            <td>学历</td>
+            <td></td>
+        </tr>
+        <tr th:each="user:${userList}">
+            <td th:text="${userStat.count}">序号</td>
+            <td th:text="${user.username}">账号</td>
+            <td th:text="${user.realName}">姓名</td>
+            <td th:text="${user.age}">年龄</td>
+            <td th:text="${user.sex==1?'男':'女'}">性别</td>
+            <td th:text="${#dates.format(user.birthday,'yyyy-MM-dd')}">生日</td>
+            <td th:switch="${user.xl}">
+                <span th:case="1">小学</span>
+                <span th:case="2">初中</span>
+                <span th:case="3">高中</span>
+                <span th:case="4">大学</span>
+                <span th:case="5">其他</span>
+            </td>
+            <td>
+                <a th:href="@{|/private/toUpdate?id=${user.id}|}">修改</a>
+                <!-- 绑定点击事件，弹出一个带有确定和取消的对话框，用户点击确定返回true 用户点击取消返回false
+                    return 这个返回值，如果返回值为true则允许浏览器的默认行为，如果返回false则阻止浏览器的默认行为
+                 -->
+                <a th:href="@{|/private/delete?id=${user.id}|}" onclick=" return confirm('确定要删除数据？')" target="success">删除</a>
+            </td>
+        </tr>
+    </table>
+    <iframe name="success" style="display: none">
+
+    </iframe>
+</body>
+</html>

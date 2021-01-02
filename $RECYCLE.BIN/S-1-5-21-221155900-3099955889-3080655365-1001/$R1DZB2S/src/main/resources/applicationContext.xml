@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+   <!--扫描普通包-->
+    <context:component-scan base-package="com.llx.ssm" />
+
+    <!--导入db.properties-->
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <!--数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}" />
+        <property name="url" value="${jdbc.jdbcUrl}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--给实体类指定别名-->
+        <property name="typeAliasesPackage"
+                  value="com.llx.ssm.bean" />
+
+        <!--扫描映射文件-->
+        <property name="mapperLocations" value="classpath:mappers/*.xml" />
+
+        <!--配置PageHelper-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <props>
+                            <!--dialect:数据库方言-->
+                            <prop key="dialect">mysql</prop>
+                            <prop key="supportMethodsArguments">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+
+    <!--扫描mapper:给mapper接口创建实现类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--查找SqlsessionFactory-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--扫描mapper接口包-->
+        <property name="basePackage" value="com.llx.ssm.mapper" />
+    </bean>
+
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--引入数据源-->
+        <property name="dataSource" ref="dataSource" />
+     </bean>
+
+    <aop:config>
+        <aop:pointcut id="pointCut"
+                      expression="execution(* com.llx.ssm.service.*.*(..))" />
+
+        <!--既能管理切面，又能解决事务的传播行为-->
+        <aop:advisor advice-ref="trAdvice" pointcut-ref="pointCut" />
+    </aop:config>
+
+
+    <!--propagation:传播-->
+    <tx:advice id="trAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="call*" propagation="REQUIRED" />
+            <tx:method name="*" propagation="REQUIRED" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+</beans>

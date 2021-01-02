@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        if("[[${errorMessage}]]"!=''){
+            alert("[[${errorMessage}]]")
+        }else if("confirm"=="[[${alertType}]]"){
+            if(confirm("[[${message}]]")){
+                //在当前窗口的父容器窗口中显示新的页面内容
+                window.parent.location.href="[[${url}]]"
+            }
+        }else{
+            alert("[[${message}]]")
+            window.parent.location.href="[[${url}]]"
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
