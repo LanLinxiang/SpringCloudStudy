@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.mapper.UserMapper">
+
+
+<!--  List<User> selectUser();-->
+  <select id="selectUser" resultType="User">
+    select*from tbl_user
+  </select>
+
+
+  <insert id="insert">
+    insert into tbl_user (id, loginAct, name, 
+      loginPwd, email, expireTime, 
+      lockState, deptno, allowIps, 
+      createTime, createBy, editTime, 
+      editBy)
+    values (#{id,jdbcType=CHAR}, #{loginact,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{loginpwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{expiretime,jdbcType=CHAR}, 
+      #{lockstate,jdbcType=CHAR}, #{deptno,jdbcType=CHAR}, #{allowips,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=CHAR}, #{createby,jdbcType=VARCHAR}, #{edittime,jdbcType=CHAR}, 
+      #{editby,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>
