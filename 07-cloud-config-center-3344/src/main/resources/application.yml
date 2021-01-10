@@ -1,0 +1,35 @@
+
+server:
+  port: 3344
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/LanLinxiang/sprincloud-config.git
+          search-paths:
+            - springcloud-config
+      label: master2
+
+
+eureka:
+
+  client:
+    register-with-eureka: true     #true表示向注册中心注册自己。
+    fetchregistry: true     #true 表示去检索服务
+    service-url:
+#      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7001.com:7001/eureka/
+
+
+
+
+  #设置OpenFeign的日志打印级别
+logging:
+  level:
+    com.llx.springcloud.service.OrderService: debug
+
+
+
