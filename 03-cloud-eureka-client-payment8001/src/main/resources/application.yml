@@ -1,0 +1,33 @@
+#端口号
+server:
+  port: 8001
+
+#mysql yml
+spring:
+  application:
+    name: cloud-eureka-client-payment-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://192.168.12.130:3306/crm?useUnicode=true&characterEncoding=utf-8&useSSL=false
+
+    username: root
+    password: root
+
+eureka:
+  client:
+    register-with-eureka: true     #true表示向注册中心注册自己。
+    fetchregistry: true     #true 表示去检索服务
+    service-url:
+#      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7001.com:7001/eureka/
+
+
+#扫描mybatis mapper 以及XML文件
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.llx.springcloud.entities
+
+
+
+

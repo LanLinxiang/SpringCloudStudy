@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01-cloud-provider-payment8001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02-cloud-consumer-order80" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-cloud-eureka-client-order80" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-cloud-eureka-client-payment8001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-cloud-eureka-client-payment8002" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-cloud-eureka-server7001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-cloud-eureka-server7002" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-cloud-eureka-zookeeper-payment8004" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/04-consumer-feign-order80" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/05-cloud-consumer-hystrix-dashboard9001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/05-cloud-provider-hystrix-payment8001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/05-consumer-feign-hystrix-order80" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06-cloud-gateway-gateway9527" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/07-cloud-config-center-3344" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/07-cloud-config-client-3355" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-api-commons" charset="UTF-8" />
+  </component>
+</project>
